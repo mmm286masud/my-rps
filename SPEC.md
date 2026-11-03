@@ -61,13 +61,16 @@ Use `unit`, `integration`, and `e2e` pytest markers. Run `.venv/bin/python check
   [mmm286masud/my-rps](https://github.com/mmm286masud/my-rps).
 - Issue: [RPS-001: Play a round, #1](https://github.com/mmm286masud/my-rps/issues/1).
 - Pull request: [RPS-001: Play a round, #2](https://github.com/mmm286masud/my-rps/pull/2),
-  targeting `main` and containing `Closes #1`.
-- CI evidence: [Python checks run](https://github.com/mmm286masud/my-rps/actions/runs/41585283759).
-  The PR's [Checks tab](https://github.com/mmm286masud/my-rps/pull/2/checks)
-  tracks checks on the latest documentation commit. The complete local check
-  result is recorded below; merge requires successful Python checks on the final
-  PR head. Issue and PR creation used the student's signed-in GitHub browser;
-  commits and pushes used the existing SSH origin.
+  merged into `main` as `5e996e4a0886d9fe48320321fa3e1a9178625be6` on
+  2026-11-03. `Closes #1` closed the linked issue; GitHub reports it completed.
+- Final PR CI: [Python checks — successful](https://github.com/mmm286masud/my-rps/actions/runs/41585349451)
+  on final PR head `9e423cbd610ff75e4d77a4d9f70fe5893fc6c200`, verified before
+  merging. Every setup/install step and full `python check.py` succeeded.
+  The issue, PR, and initial real CI link were saved and pushed in that final PR
+  commit before merge. This completion record updates the link to the final run.
+  Issue and PR creation used the student's signed-in GitHub browser; commits,
+  pushes, and merge used the existing SSH origin. The working tree was clean and
+  merged `main` matched the reviewed PR tree at delivery verification.
 - Implementation: [game.py](game.py) handles ties, the three player-winning
   pairs, and the remaining valid losses. The original server and UI are retained.
 - Unit evidence: [tests/test_game.py](tests/test_game.py) contains all nine explicit
