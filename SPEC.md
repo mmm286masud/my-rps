@@ -59,12 +59,15 @@ Use `unit`, `integration`, and `e2e` pytest markers. Run `.venv/bin/python check
 
 - Delivery branch: `rps-001` in the student's public repository,
   [mmm286masud/my-rps](https://github.com/mmm286masud/my-rps).
-  GitHub API issue creation returned HTTP 403 (`Resource not accessible by
-  integration`). The connected GitHub account has read access only; no cached
-  non-interactive HTTPS credential was available. Browser control stopped because
-  it could not reliably identify the current URL. SSH write access was verified.
-  Issue/PR creation, final-commit CI, merge, and issue closure require working
-  GitHub write access; no URLs or successful outcomes are asserted for them.
+- Issue: [RPS-001: Play a round, #1](https://github.com/mmm286masud/my-rps/issues/1).
+- Pull request: [RPS-001: Play a round, #2](https://github.com/mmm286masud/my-rps/pull/2),
+  targeting `main` and containing `Closes #1`.
+- CI evidence: [Python checks run](https://github.com/mmm286masud/my-rps/actions/runs/41585283759).
+  The PR's [Checks tab](https://github.com/mmm286masud/my-rps/pull/2/checks)
+  tracks checks on the latest documentation commit. The complete local check
+  result is recorded below; merge requires successful Python checks on the final
+  PR head. Issue and PR creation used the student's signed-in GitHub browser;
+  commits and pushes used the existing SSH origin.
 - Implementation: [game.py](game.py) handles ties, the three player-winning
   pairs, and the remaining valid losses. The original server and UI are retained.
 - Unit evidence: [tests/test_game.py](tests/test_game.py) contains all nine explicit
