@@ -27,7 +27,20 @@ Results are from the **player’s perspective**. `determine_winner(player, compu
 
 ### Agreed plan
 
-Before implementation, predict one matchup and explain it with your local coding agent. Discuss a short plan and checks. Once it makes sense, ask the agent to replace this paragraph with the agreed plan, preserving the expected results above. Continue in the same chat.
+Implement the nine results above in the existing rule function, from the player's
+perspective. Keep the supplied Flask server and interface, and make each choice
+an independent round with no score or storage. The student authorized autonomous
+implementation, tests, documentation, and GitHub delivery.
+
+Add nine literal unit cases, a real request/result integration test with replay,
+and a Chromium round with replay and Tab/Enter activation. Stabilize only the
+computer's random choice. Reuse the supplied missing/unsupported-input checks:
+missing input or `lizard` must return HTTP 400 with a useful explanation. A valid
+Rock-versus-Paper loss is successful handling of valid input.
+
+Run the complete Python 3.12 `check.py`, inspect tracked and new files, then deliver
+through a feature branch and PR with successful CI. Repair Windows test-server
+cleanup so the reloader child cannot hold its output pipe open after a test.
 
 ### Checks
 
@@ -44,7 +57,51 @@ Use `unit`, `integration`, and `e2e` pytest markers. Run `.venv/bin/python check
 
 ### Work record
 
-- Issue: add your own issue URL.
-- Pull request / CI: add actual URLs when they exist.
-- Implementation: **Not implemented.** The shell is supplied; `game.py` is unfinished.
-- Checks: **Rules not verified.** Supplied request/browser tests cover the shell only. After implementation, record actual full-check results and your browser observations here; put detailed results in the PR. Passing formatting and analysis alone is not evidence of correct rules.
+- Delivery branch: `rps-001` in the student's public repository,
+  [mmm286masud/my-rps](https://github.com/mmm286masud/my-rps).
+- Issue: [RPS-001: Play a round, #1](https://github.com/mmm286masud/my-rps/issues/1).
+- Pull request: [RPS-001: Play a round, #2](https://github.com/mmm286masud/my-rps/pull/2),
+  targeting `main` and containing `Closes #1`.
+- CI evidence: [Python checks run](https://github.com/mmm286masud/my-rps/actions/runs/41585283759).
+  The PR's [Checks tab](https://github.com/mmm286masud/my-rps/pull/2/checks)
+  tracks checks on the latest documentation commit. The complete local check
+  result is recorded below; merge requires successful Python checks on the final
+  PR head. Issue and PR creation used the student's signed-in GitHub browser;
+  commits and pushes used the existing SSH origin.
+- Implementation: [game.py](game.py) handles ties, the three player-winning
+  pairs, and the remaining valid losses. The original server and UI are retained.
+- Unit evidence: [tests/test_game.py](tests/test_game.py) contains all nine explicit
+  literal cases with the `unit` marker. Its `integration` test submits actual
+  requests using real rules, displays both moves and a loss, then replays to a win.
+  Existing negative request checks remain in [tests/test_shell.py](tests/test_shell.py).
+- Browser evidence: [tests/e2e/test_round.py](tests/e2e/test_round.py), marked `e2e`,
+  fixes only the computer's random choice to Paper. Chromium clicks Rock and sees
+  Computer wins (`lose`), uses Tab/Enter to choose Scissors and sees You win!
+  (`win`), then chooses Paper and sees It's a tie (`tie`). Each new round replaces
+  the previous choices/result. These are automated observations.
+- Compatibility: [tests/e2e/test_dev_refresh.py](tests/e2e/test_dev_refresh.py)
+  stops only its launched server process tree on Windows. The original cleanup
+  stalled after the first successful test because the reloader child retained
+  the stdout pipe. Existing assertions and Linux cleanup are preserved.
+- Full local checks (2026-11-03): Python 3.12.10,
+  `.venv\Scripts\python.exe check.py` — Black PASS (11 files), Pylint PASS,
+  non-browser pytest **23 passed**, Chromium pytest **6 passed**. No `--fast`.
+  `git diff --check` also passed. No checks or substantive assertions were removed.
+- Review: compared all nine literal cases to the expected-result table; inspected
+  the implementation, both new test modules, the Windows cleanup change, and
+  tracked/untracked files. Positive feature tests patch randomness only.
+- Example test and explanation (AI supplied): the literal case
+  `("rock", "paper", "lose")` is checked with
+  `assert determine_winner(player, computer) == expected`. It detects reversed
+  player/computer perspective or incorrectly treating Paper as losing to Rock.
+  Paper covers Rock, so the player must lose. This is not a student prediction
+  or student test interpretation.
+- Student participation: the student supplied a screenshot of the unfinished
+  starter screen, then explicitly requested bypassing the personal checkpoints.
+  No personal matchup prediction, test-purpose explanation, or completed-game
+  round/replay/keyboard observation was supplied. Those rubric items remain
+  unverified; automated results are not substituted for personal participation.
+- AI assistance: Codex prepared the environment, explained the sample matchup,
+  implemented the rules/tests, repaired Windows fixture cleanup, ran full checks,
+  reviewed the diff, and prepared the delivery record. Student understanding and
+  a particular grade are not claimed.
