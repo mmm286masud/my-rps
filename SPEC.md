@@ -99,11 +99,23 @@ Use `unit`, `integration`, and `e2e` pytest markers. Run `.venv/bin/python check
   player/computer perspective or incorrectly treating Paper as losing to Rock.
   Paper covers Rock, so the player must lose. This is not a student prediction
   or student test interpretation.
+- Student test review: after seeing the actual literal case
+  `("scissors", "rock", "lose")` and its assertion in
+  [tests/test_game.py](tests/test_game.py), the student explained that the player
+  should lose and the test checks whether the result matches that expectation.
+  AI clarified afterward that an incorrect `win` or `tie` would fail the test.
+- Personal browser review: the student played Rock against computer Rock and
+  observed a tie. When asked why it made sense, the student explained that the
+  moves were the same. The student then confirmed that Tab/Enter worked and the
+  new round replaced the previous one, reporting player Scissors versus computer
+  Paper with a win. AI explained afterward that Scissors beats Paper.
 - Student participation: the student supplied a screenshot of the unfinished
-  starter screen, then explicitly requested bypassing the personal checkpoints.
-  No personal matchup prediction, test-purpose explanation, or completed-game
-  round/replay/keyboard observation was supplied. Those rubric items remain
-  unverified; automated results are not substituted for personal participation.
+  starter screen and later returned for follow-up review after implementation.
+  The student explained that player Scissors loses to computer Rock because Rock
+  crushes Scissors, after AI prompted for the reason. This is a postimplementation
+  explanation; no preimplementation prediction is claimed. The student's test
+  review, personal completed-game round, replay, and keyboard feedback are
+  recorded above. Automated results are not substituted for personal participation.
 - AI assistance: Codex prepared the environment, explained the sample matchup,
   implemented the rules/tests, repaired Windows fixture cleanup, ran full checks,
   reviewed the diff, and prepared the delivery record. Student understanding and
