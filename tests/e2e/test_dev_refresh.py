@@ -52,7 +52,15 @@ def fixture_launch_game(tmp_path, request):
                     break
             yield tmp_path, address.group(1), output
         finally:
-            process.terminate()
+            if os.name == "nt":
+                # Werkzeug's reloader child also owns the stdout pipe on Windows.
+                subprocess.run(
+                    ["taskkill", "/PID", str(process.pid), "/T", "/F"],
+                    check=False,
+                    capture_output=True,
+                )
+            else:
+                process.terminate()
             try:
                 process.wait(timeout=10)
             except subprocess.TimeoutExpired:
